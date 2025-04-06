@@ -5,7 +5,6 @@
 #include "BridgeElement.h"
 #include "BridgeConnector.generated.h"
 
-// ✅ FORWARD DECLARE instead of including
 class ABridgeBeam;
 
 UCLASS()
@@ -16,11 +15,15 @@ class BALLPLATFORMER_API ABridgeConnector : public ABridgeElement
 public:
 	ABridgeConnector();
 
-	UPROPERTY(VisibleAnywhere)
-	USceneComponent* Root;
+	// Components
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Components")
+	UStaticMeshComponent* Mesh;	
 
 	UPROPERTY()
 	TArray<ABridgeBeam*> ConnectedBeams;
 
 	void AddBeam(ABridgeBeam* Beam);
+    
+	// Remove a beam from this connector
+	void RemoveBeam(ABridgeBeam* Beam);
 };
